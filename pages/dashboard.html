@@ -34,17 +34,19 @@
   </main>
 
   <!-- Modal para crear bankroll -->
-  <div id="modalBankroll" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
+  <!-- Modal para crear bankroll -->
+    <div id="modalBankroll" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
     <div class="bg-white rounded-xl shadow-lg p-6 w-11/12 max-w-sm">
-      <h2 class="text-xl font-bold mb-4">Nuevo Bankroll</h2>
-      <input id="nombreBankroll" type="text" placeholder="Nombre del bankroll" class="w-full p-2 border rounded mb-3" />
-      <input id="bankPrincipal" type="number" placeholder="Bank principal (€)" class="w-full p-2 border rounded mb-4" />
-      <div class="flex justify-between">
+        <h2 class="text-xl font-bold mb-4">Nuevo Bankroll</h2>
+        <input id="nombreBankroll" type="text" placeholder="Nombre del bankroll" class="w-full p-2 border rounded mb-3" />
+        <input id="bankPrincipal" type="number" placeholder="Bank principal (€)" class="w-full p-2 border rounded mb-4" />
+        <div class="flex justify-between">
         <button onclick="cerrarModal()" class="text-gray-500 hover:text-black">Cancelar</button>
         <button onclick="crearBankroll()" class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700">Crear</button>
-      </div>
+        </div>
     </div>
-  </div>
+    </div>
+
 
   <!-- Menú inferior fijo -->
   <footer class="bg-white border-t border-gray-200 h-[15vh] flex justify-around items-center fixed bottom-0 left-0 w-full shadow-inner z-40">
