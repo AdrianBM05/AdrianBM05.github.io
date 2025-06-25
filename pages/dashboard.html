@@ -1,5 +1,67 @@
-<script>
-    if(localStorage.getItem("logueado") !== "true") {
-        window.location.href = "../index.html";
+<!-- pages/dashboard.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard - Apuestas</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 min-h-screen flex flex-col">
+
+  <!-- Protección -->
+  <script>
+    if (localStorage.getItem("logueado") !== "true") {
+      window.location.href = "../index.html";
     }
-</script>
+  </script>
+
+  <!-- Contenedor principal (85% para los bankrolls) -->
+  <main class="flex-grow overflow-auto p-4" id="bankrollContainer">
+    <!-- Aquí aparecerán los bankrolls -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+      <!-- Bankroll de ejemplo -->
+      <div class="bg-white rounded-xl shadow-md p-4 border-l-4" style="border-color: #16a34a;" id="bankroll-1">
+        <h3 class="text-xl font-semibold text-green-600">Mundial Qatar</h3>
+        <p class="text-sm text-gray-600 mt-1">Importe apostado: 120 €</p>
+        <p class="text-sm mt-1 font-medium text-green-600">Beneficio: +30 €</p>
+    </div>
+  </main>
+
+  <!-- Menú inferior fijo (15%) -->
+  <footer class="bg-white border-t border-gray-200 h-[15vh] flex justify-around items-center fixed bottom-0 left-0 w-full shadow-inner">
+    <button onclick="nuevoBankroll()" class="flex flex-col items-center text-red-600 hover:text-red-800">
+      <span class="text-2xl">➕</span>
+      <span class="text-xs">Nuevo</span>
+    </button>
+    <button onclick="irA('apuestas.html')" class="flex flex-col items-center text-gray-600 hover:text-black">
+      <span class="text-2xl">📋</span>
+      <span class="text-xs">Apuestas</span>
+    </button>
+    <button onclick="irA('stats.html')" class="flex flex-col items-center text-gray-600 hover:text-black">
+      <span class="text-2xl">📊</span>
+      <span class="text-xs">Estadísticas</span>
+    </button>
+    <button onclick="cerrarSesion()" class="flex flex-col items-center text-gray-600 hover:text-black">
+      <span class="text-2xl">🚪</span>
+      <span class="text-xs">Salir</span>
+    </button>
+  </footer>
+
+  <script>
+    function cerrarSesion() {
+      localStorage.removeItem("logueado");
+      window.location.href = "../index.html";
+    }
+
+    function irA(pagina) {
+      window.location.href = pagina;
+    }
+
+    function nuevoBankroll() {
+      alert("Aquí iría la lógica para crear un nuevo bankroll");
+      // Aquí insertaremos una tarjeta nueva en el DOM + localStorage más adelante
+    }
+  </script>
+</body>
+</html>
