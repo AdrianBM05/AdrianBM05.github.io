@@ -16,21 +16,39 @@
     }
   </script>
 
-  <!-- Contenedor principal (85% para los bankrolls) -->
+  <!-- Ordenar -->
+  <div class="px-4 pt-4">
+    <label for="ordenar" class="text-sm font-semibold text-gray-700">Ordenar por:</label>
+    <select id="ordenar" onchange="ordenarBankrolls()" class="ml-2 p-1 border rounded text-sm">
+      <option value="fecha">Fecha creación</option>
+      <option value="nombre">Nombre</option>
+      <option value="beneficio">Beneficio</option>
+    </select>
+  </div>
+
+  <!-- Contenedor principal (85%) -->
   <main class="flex-grow overflow-auto p-4" id="bankrollContainer">
-    <!-- Aquí aparecerán los bankrolls -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-      <!-- Bankroll de ejemplo -->
-      <div class="bg-white rounded-xl shadow-md p-4 border-l-4" style="border-color: #16a34a;" id="bankroll-1">
-        <h3 class="text-xl font-semibold text-green-600">Mundial Qatar</h3>
-        <p class="text-sm text-gray-600 mt-1">Importe apostado: 120 €</p>
-        <p class="text-sm mt-1 font-medium text-green-600">Beneficio: +30 €</p>
+    <div class="grid grid-cols-1 gap-4" id="bankrollGrid">
+      <!-- Tarjetas de bankroll se insertan aquí -->
     </div>
   </main>
 
-  <!-- Menú inferior fijo (15%) -->
-  <footer class="bg-white border-t border-gray-200 h-[15vh] flex justify-around items-center fixed bottom-0 left-0 w-full shadow-inner">
-    <button onclick="nuevoBankroll()" class="flex flex-col items-center text-red-600 hover:text-red-800">
+  <!-- Modal para crear bankroll -->
+  <div id="modalBankroll" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
+    <div class="bg-white rounded-xl shadow-lg p-6 w-11/12 max-w-sm">
+      <h2 class="text-xl font-bold mb-4">Nuevo Bankroll</h2>
+      <input id="nombreBankroll" type="text" placeholder="Nombre del bankroll" class="w-full p-2 border rounded mb-3" />
+      <input id="bankPrincipal" type="number" placeholder="Bank principal (€)" class="w-full p-2 border rounded mb-4" />
+      <div class="flex justify-between">
+        <button onclick="cerrarModal()" class="text-gray-500 hover:text-black">Cancelar</button>
+        <button onclick="crearBankroll()" class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700">Crear</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Menú inferior fijo -->
+  <footer class="bg-white border-t border-gray-200 h-[15vh] flex justify-around items-center fixed bottom-0 left-0 w-full shadow-inner z-40">
+    <button onclick="abrirModal()" class="flex flex-col items-center text-red-600 hover:text-red-800">
       <span class="text-2xl">➕</span>
       <span class="text-xs">Nuevo</span>
     </button>
@@ -48,6 +66,8 @@
     </button>
   </footer>
 
+  <!-- Scripts -->
+  <script src="../js/bankrolls.js"></script>
   <script>
     function cerrarSesion() {
       localStorage.removeItem("logueado");
@@ -58,9 +78,12 @@
       window.location.href = pagina;
     }
 
-    function nuevoBankroll() {
-      alert("Aquí iría la lógica para crear un nuevo bankroll");
-      // Aquí insertaremos una tarjeta nueva en el DOM + localStorage más adelante
+    function abrirModal() {
+      document.getElementById("modalBankroll").classList.remove("hidden");
+    }
+
+    function cerrarModal() {
+      document.getElementById("modalBankroll").classList.add("hidden");
     }
   </script>
 </body>
