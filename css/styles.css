@@ -1,25 +1,75 @@
-/* Estilo general del contenedor */
-.container {
-    max-width: 400px;
-    margin: 40px auto;
-    padding: 24px;
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body, .main-layout {
+    height: 100vh;
+    min-height: 100vh;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.main-layout {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    height: 10vh;
+    min-height: 56px;
     background: #f7f7f7;
-    border-radius: 10px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-    text-align: center;
+    padding: 0 16px;
+    box-sizing: border-box;
+    border-bottom: 1px solid #e0e0e0;
 }
 
-/* Título principal */
-h1 {
+.menu-btn {
+    background: none;
+    border: none;
+    font-size: 2rem;
+    margin-right: 16px;
+    cursor: pointer;
+}
+
+.header h1 {
+    font-size: 1.3rem;
+    margin: 0;
     color: #222;
-    margin-bottom: 24px;
 }
 
-/* Lista de bankrolls */
+.content {
+    flex: 1 1 auto;
+    padding: 16px;
+    overflow-y: auto;
+    background: #fafafa;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.ordenar {
+    width: 100%;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    justify-content: flex-end;
+}
+
 .bankroll-list {
     list-style: none;
     padding: 0;
-    margin-bottom: 24px;
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
 }
 
 .bankroll-item {
@@ -29,9 +79,21 @@ h1 {
     border-radius: 6px;
     border: 1px solid #e0e0e0;
     font-weight: bold;
+    text-align: left;
 }
 
-/* Botón para crear bankroll */
+.footer {
+    height: 10vh;
+    min-height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f7f7f7;
+    border-top: 1px solid #e0e0e0;
+    position: sticky;
+    bottom: 0;
+}
+
 .btn-nuevo {
     background: #007bff;
     color: #fff;
@@ -41,8 +103,24 @@ h1 {
     font-size: 16px;
     cursor: pointer;
     transition: background 0.2s;
+    width: 90%;
+    max-width: 400px;
 }
 
 .btn-nuevo:hover {
     background: #0056b3;
+}
+
+/* Responsive para móviles */
+@media (max-width: 600px) {
+    .header h1 {
+        font-size: 1rem;
+    }
+    .btn-nuevo {
+        font-size: 1rem;
+        padding: 10px 0;
+    }
+    .content {
+        padding: 8px;
+    }
 }

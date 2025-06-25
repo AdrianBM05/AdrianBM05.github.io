@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Control de Apuestas</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="main-layout">
+        <header class="header">
+            <button class="menu-btn">&#9776;</button>
+            <h1>Mis Bankrolls</h1>
+        </header>
+        <main class="content">
+            <div class="ordenar">
+                <label for="ordenar-select">Ordenar:</label>
+                <select id="ordenar-select">
+                    <option value="nombre">Nombre</option>
+                    <option value="capital">Capital</option>
+                </select>
+            </div>
+            <ul class="bankroll-list">
+                <li class="bankroll-item">Ejemplo: LaLiga - 1000€</li>
+            </ul>
+        </main>
+        <footer class="footer">
+            <button class="btn-nuevo">Crear Bankroll</button>
+        </footer>
+    </div>
+    <script src="js/main.js"></script>
+</body>
+</html>
