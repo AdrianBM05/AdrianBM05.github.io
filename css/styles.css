@@ -1,8 +1,48 @@
-/* styles.css */
-body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+/* Estilo general del contenedor */
+.container {
+    max-width: 400px;
+    margin: 40px auto;
+    padding: 24px;
+    background: #f7f7f7;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    text-align: center;
 }
+
+/* Título principal */
 h1 {
-  color: #333;
-  text-align: center;
+    color: #222;
+    margin-bottom: 24px;
+}
+
+/* Lista de bankrolls */
+.bankroll-list {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 24px;
+}
+
+.bankroll-item {
+    background: #fff;
+    margin-bottom: 10px;
+    padding: 12px;
+    border-radius: 6px;
+    border: 1px solid #e0e0e0;
+    font-weight: bold;
+}
+
+/* Botón para crear bankroll */
+.btn-nuevo {
+    background: #007bff;
+    color: #fff;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.btn-nuevo:hover {
+    background: #0056b3;
 }
