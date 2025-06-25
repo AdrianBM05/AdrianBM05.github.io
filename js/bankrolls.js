@@ -25,13 +25,13 @@ function crearBankroll() {
   renderizarBankrolls();
 }
 
-function renderizarBankrolls() {
+function recargarPrincipal() {
   const contenedor = document.getElementById("bankrollGrid");
   contenedor.innerHTML = "";
 
   let lista = JSON.parse(localStorage.getItem("bankrolls") || "[]");
 
-  // Ordenar según selector
+  // Ordenar según criterio
   const criterio = document.getElementById("ordenar")?.value || "fecha";
   if (criterio === "nombre") lista.sort((a, b) => a.nombre.localeCompare(b.nombre));
   if (criterio === "beneficio") lista.sort((a, b) => b.beneficio - a.beneficio);
@@ -61,6 +61,7 @@ function renderizarBankrolls() {
     contenedor.appendChild(tarjeta);
   });
 }
+
 
 function ordenarBankrolls() {
   renderizarBankrolls();
