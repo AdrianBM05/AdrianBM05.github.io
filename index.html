@@ -4,18 +4,20 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mi App de Apuestas</title>
+  <title>Login - Apuestas</title>
   <link rel="stylesheet" href="css/styles.css" />
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gray-100 min-h-screen flex items-center justify-center">
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
   <div class="bg-white p-8 rounded-xl shadow-md w-full max-w-sm text-center">
     <h1 class="text-2xl font-bold mb-4">Iniciar sesión</h1>
-    <input type="text" placeholder="Usuario" class="w-full mb-3 p-2 border rounded" />
-    <input type="password" placeholder="Contraseña" class="w-full mb-4 p-2 border rounded" />
-    <button class="w-full bg-red-600 text-white py-2 rounded hover:bg-red-700 transition">Entrar</button>
+    <form id="loginForm">
+      <input type="text" id="username" placeholder="Usuario" class="w-full mb-3 p-2 border rounded" required />
+      <input type="password" id="password" placeholder="Contraseña" class="w-full mb-4 p-2 border rounded" required />
+      <button type="submit" class="w-full bg-red-600 text-white py-2 rounded hover:bg-red-700 transition">Entrar</button>
+      <p id="errorMsg" class="text-red-500 text-sm mt-3 hidden">Usuario o contraseña incorrectos</p>
+    </form>
   </div>
-
   <script src="js/auth.js"></script>
 </body>
 </html>
