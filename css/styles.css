@@ -37,12 +37,15 @@ body, .main-layout {
     font-size: 2rem;
     margin-right: 16px;
     cursor: pointer;
+    flex-shrink: 0;
 }
 
 .header h1 {
     font-size: 1.3rem;
     margin: 0;
     color: #222;
+    flex: 1;
+    text-align: left;
 }
 
 .content {
@@ -90,25 +93,43 @@ body, .main-layout {
     justify-content: center;
     background: #f7f7f7;
     border-top: 1px solid #e0e0e0;
-    position: sticky;
+    position: fixed;
+    left: 0;
     bottom: 0;
+    width: 100vw;
+    z-index: 10;
+    padding: 0;
 }
 
 .btn-nuevo {
     background: #007bff;
     color: #fff;
     border: none;
-    padding: 12px 24px;
-    border-radius: 6px;
-    font-size: 16px;
+    padding: 0;
+    border-radius: 0;
+    font-size: 1.2rem;
     cursor: pointer;
     transition: background 0.2s;
-    width: 90%;
-    max-width: 400px;
+    width: 100vw;
+    height: 100%;
+    max-width: none;
+    border-radius: 0;
 }
 
 .btn-nuevo:hover {
     background: #0056b3;
+}
+
+/* Ajuste para el contenido para que no quede oculto tras el footer fijo */
+.content {
+    flex: 1 1 auto;
+    padding: 16px;
+    overflow-y: auto;
+    background: #fafafa;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 10vh; /* deja espacio para el footer */
 }
 
 /* Responsive para móviles */
