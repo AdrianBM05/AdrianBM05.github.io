@@ -31,7 +31,7 @@ document.getElementById("loginBtn").addEventListener("click", async () => {
     }));
 
     // Redirigir al dashboard
-    window.location.href = "./src/dashboard.html";
+    window.location.href = "../dashboard.html";
   } catch (error) {
     alert("Error al iniciar sesión: " + error.message);
     console.error(error);
