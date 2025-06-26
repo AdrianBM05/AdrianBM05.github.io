@@ -40,41 +40,30 @@ async function cargarBankroll() {
 function mostrarResumen(bankroll) {
   document.getElementById("nombreBankroll").textContent = bankroll.nombre;
 
-  const colorGanancia = bankroll.ganancias >= 0 ? 'text-green-500' : 'text-red-500';
-  const colorROI = bankroll.roi >= 0 ? 'text-green-500' : 'text-red-500';
+  const colorGanancia = bankroll.ganancias >= 0 ? 'text-green-400' : 'text-red-400';
+  const colorROI = bankroll.roi >= 0 ? 'text-green-400' : 'text-red-400';
 
   const resumen = document.getElementById("resumen");
   resumen.innerHTML = `
-    <div class="border rounded-2xl overflow-hidden shadow-sm bg-white max-w-xl mx-auto">
-      <!-- Cabecera -->
-      <div class="flex justify-between items-center px-4 py-3 border-b">
-        <span class="text-sm text-gray-800 font-medium">Nombre del bankroll</span>
-        <button class="text-blue-600 hover:text-blue-800">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-            <path d="M6 10a2 2 0 114 0 2 2 0 01-4 0zm5 0a2 2 0 114 0 2 2 0 01-4 0z" />
-          </svg>
-        </button>
+    <div class="bankroll-card bg-[#2d2948] rounded-2xl p-4 border border-gray-600 shadow-md transition">
+      <div class="flex justify-between items-center mb-4">
+        <span class="text-sm font-medium text-white">${bankroll.nombre}</span>
+        <button class="text-white hover:text-purple-400 text-lg" onclick="alert('Opciones futuras')">⚙️</button>
       </div>
-
-      <!-- Estadísticas -->
-      <div class="flex justify-around items-center px-4 py-6 bg-gray-100">
-        <div class="bg-gray-200 rounded-xl px-4 py-3 text-center w-28">
-          <p class="text-xs text-gray-600">Inicial</p>
-          <p class="font-semibold text-gray-800">${bankroll.bankInicial.toFixed(2)} €</p>
+      <div class="flex justify-between gap-2">
+        <div class="flex-1 bg-[#1e1b3a] rounded-xl py-2 text-center text-sm text-gray-300 shadow-inner">
+          Inicial<br><strong class="text-white">${bankroll.bankInicial.toFixed(2)} €</strong>
         </div>
-        <div class="bg-gray-200 rounded-xl px-4 py-3 text-center w-28 ${colorROI}">
-          <p class="text-xs text-gray-600">ROI</p>
-          <p class="font-semibold">${bankroll.roi.toFixed(2)} %</p>
+        <div class="flex-1 bg-[#1e1b3a] rounded-xl py-2 text-center text-sm shadow-inner ${colorROI}">
+          ROI<br><strong>${bankroll.roi.toFixed(2)} %</strong>
         </div>
-        <div class="bg-gray-200 rounded-xl px-4 py-3 text-center w-28 ${colorGanancia}">
-          <p class="text-xs text-gray-600">Beneficio</p>
-          <p class="font-semibold">${bankroll.ganancias.toFixed(2)} €</p>
+        <div class="flex-1 bg-[#1e1b3a] rounded-xl py-2 text-center text-sm shadow-inner ${colorGanancia}">
+          Beneficio<br><strong>${bankroll.ganancias.toFixed(2)} €</strong>
         </div>
       </div>
     </div>
   `;
 }
-
 
 
 
