@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bankroll - BetTracker</title>
+  <link rel="stylesheet" href="../css/bankroll.css" />
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-[#1e1b3a] text-white min-h-screen flex flex-col">
+
+  <header class="flex items-center justify-between p-4 bg-[#2d2948] shadow-md">
+    <button onclick="window.history.back()" class="text-white text-xl">←</button>
+    <h1 id="nombreBankroll" class="text-lg font-semibold mx-auto">Cargando...</h1>
+    <div style="width: 24px;"></div>
+  </header>
+
+  <main class="flex-grow p-4 space-y-4">
+    <div id="resumen" class="grid grid-cols-2 gap-4 text-center">
+      <!-- Aquí irán: BankInicial, Ganancias, ROI, etc. -->
+    </div>
+
+    <div class="flex justify-end">
+      <button id="addApuestaBtn" class="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded-xl">
+        ➕ Añadir Apuesta
+      </button>
+    </div>
+
+    <div id="apuestasContainer" class="space-y-4">
+      <!-- Aquí se mostrarán apuestas -->
+    </div>
+  </main>
+
+  <script type="module" src="../js/bankroll.js"></script>
+</body>
+</html>

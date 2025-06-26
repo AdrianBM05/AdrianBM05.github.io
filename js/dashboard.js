@@ -42,20 +42,21 @@ async function cargarBankrolls() {
 
 document.getElementById("addBankrollBtn").addEventListener("click", async () => {
   const nombre = prompt("Nombre del bankroll:");
-  const bankInicial = parseFloat(prompt("Bank inicial (€ o u):"));
-  const moneda = prompt("¿Moneda o unidad? (€, u)", "€");
+  const bankInicial = parseFloat(prompt("Bank inicial (€):"));
 
-  if (nombre && !isNaN(bankInicial)) {
-    await addDoc(collection(db, "bankrolls"), {
-      uid: UID,
-      nombre,
-      bankInicial,
-      moneda,
-      ganancias: 0,
-      apuestas: 0,
-      roi: 0,
-      creadoEn: new Date()
-    });
-    cargarBankrolls();
-  }
+  if (!nombre || isNaN(bankInicial)) return;
+
+  const docRef = await addDoc(collection(db, "bankrolls"), {
+    nombre,
+    bankInicial,
+    moneda: "€",
+    ganancias: 0,
+    apuestas: 0,
+    roi: 0,
+    creadoEn: new Date()
+  });
+
+  // Redirigir directamente al nuevo bankroll
+  window.location.href = `bankroll.html?id=${docRef.id}`;
 });
+
