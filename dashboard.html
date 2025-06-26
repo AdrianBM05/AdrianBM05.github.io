@@ -30,10 +30,40 @@
         </select>
       </div>
 
+      <!-- Contenedor para los bankrolls -->
       <div
         id="bankrollsContainer"
         class="grid gap-4 md:grid-cols-2 lg:grid-cols-3"
-      ></div>
+      >
+        <!-- Ejemplo de tarjeta de bankroll -->
+        <div class="bg-[#2d2948] rounded-xl shadow-lg flex flex-col justify-between">
+          <!-- Parte superior: nombre + configuración -->
+          <div class="flex items-center justify-between px-4 pt-4">
+        <span class="text-lg font-semibold">Nombre Bankroll</span>
+        <button class="text-gray-400 hover:text-white text-xl" title="Configurar">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+          </svg>
+        </button>
+          </div>
+          <!-- Parte inferior: Capital inicial + ROI + Beneficios -->
+          <div class="px-4 pb-4 pt-2 flex flex-col gap-2">
+        <div class="flex items-center justify-between">
+          <span class="text-sm text-gray-400">Capital inicial</span>
+          <span class="font-medium">€1,000.00</span>
+        </div>
+        <div class="flex items-center justify-between">
+          <span class="text-sm text-gray-400">ROI</span>
+          <span class="font-medium text-green-400">+12.5%</span>
+        </div>
+        <div class="flex items-center justify-between">
+          <span class="text-sm text-gray-400">Beneficios</span>
+          <span class="font-medium text-green-400">+€125.00</span>
+        </div>
+          </div>
+        </div>
+        <!-- Fin ejemplo -->
+      </div>
     </main>
 
     <!-- Botón inferior -->
