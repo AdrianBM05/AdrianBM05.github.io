@@ -3,64 +3,21 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>BetTracker - Login</title>
-  <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js"></script>
-  <script src="https://cdn.tailwindcss.com"></script>
+  <meta http-equiv="refresh" content="0; url=dashboard.html" />
+  <title>Redirigiendo a BetTracker...</title>
+  <style>
+    body {
+      background-color: #1e1b3a;
+      color: white;
+      font-family: sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+  </style>
 </head>
-<body class="bg-gray-100 flex items-center justify-center h-screen">
-  <div class="bg-white p-8 rounded-xl shadow-md text-center">
-    <h1 class="text-2xl font-bold mb-4">BetTracker</h1>
-    <button id="loginBtn" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">
-      Iniciar sesión con Google
-    </button>
-  </div>
-
-  <script type="module" src="js/index.js">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
-    import { getAuth, signInWithPopup, GoogleAuthProvider } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js";
-
-    const firebaseConfig = {
-      apiKey: "AIzaSyBH2El3mxJPdhHFixOLxT-VjN1djZNr0wI",
-      authDomain: "bettracker-e4900.firebaseapp.com",
-      projectId: "bettracker-e4900",
-      storageBucket: "bettracker-e4900.firebasestorage.app",
-      messagingSenderId: "994805962633",
-      appId: "1:994805962633:web:5316c2cbf8a407687cf358",
-      measurementId: "G-5FK0H86L26"
-    };
-
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
-    const provider = new GoogleAuthProvider();
-
-    document.getElementById("loginBtn").addEventListener("click", async () => {
-      const btn = document.getElementById("loginBtn");
-      btn.disabled = true;
-      btn.textContent = "Iniciando sesión...";
-
-      try {
-        const result = await signInWithPopup(auth, provider);
-        const user = result.user;
-        localStorage.setItem("user", JSON.stringify({
-          uid: user.uid,
-          displayName: user.displayName,
-          email: user.email,
-          photoURL: user.photoURL
-        }));
-        window.location.href = "dashboard.html";
-      } catch (error) {
-        alert("Error al iniciar sesión: " + error.message);
-        console.error("Código:", error.code);
-        console.error("Mensaje:", error.message);
-        btn.disabled = false;
-        btn.textContent = "Iniciar sesión con Google";
-      }
-    });
-
-  </script>
-
+<body>
+  <h1>Cargando BetTracker...</h1>
 </body>
 </html>

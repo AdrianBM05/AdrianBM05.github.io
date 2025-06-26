@@ -11,15 +11,15 @@
   <!-- Encabezado -->
   <header class="flex items-center justify-between p-4 bg-[#2d2948] shadow-md">
     <button id="menuBtn" class="text-white text-2xl font-bold">☰</button>
-    <h1 class="text-xl font-semibold">BetTracker</h1>
-    <button id="logoutBtn" class="text-sm text-red-400 hover:text-red-200">Cerrar sesión</button>
+    <h1 class="text-xl font-semibold mx-auto">BetTracker</h1>
   </header>
+
 
   <!-- Contenido principal -->
   <main class="flex-grow p-4">
     <div class="flex items-center justify-between mb-4">
       <h2 class="text-lg font-semibold">Tus bankrolls</h2>
-      <select id="ordenSelect" class="bg-[#2d2948] text-white border border-gray-500 rounded p-1">
+      <select id="ordenSelect" class="bg-[#2d2948] text-white border border-gray-500 rounded px-2 py-1 text-sm">
         <option value="fecha">Por fecha</option>
         <option value="ganancias">Por beneficio</option>
         <option value="roi">Por ROI</option>
@@ -30,12 +30,14 @@
   </main>
 
   <!-- Botón inferior -->
-  <footer class="p-4 bg-[#2d2948]">
-    <button id="addBankrollBtn" class="w-full bg-green-500 hover:bg-green-600 text-white py-2 rounded-xl">
-      ➕ Añadir Bankroll
-    </button>
+  <footer class="fixed bottom-0 left-0 right-0 z-50 bg-[#2d2948]">
+    <div class="w-full">
+      <button id="addBankrollBtn"
+        class="w-full text-center bg-green-500 hover:bg-green-600 text-white py-4 text-lg font-semibold">
+        ➕ Añadir Bankroll
+      </button>
+    </div>
   </footer>
-
   <script type="module" src="../js/dashboard.js"></script>
 </body>
 </html>

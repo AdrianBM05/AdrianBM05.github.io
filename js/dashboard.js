@@ -1,28 +1,25 @@
-import { auth, db } from './firebase.js';
-import { collection, query, where, getDocs, addDoc, orderBy } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js";
-import { signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js";
+import { db } from './firebase.js';
+import { collection, query, getDocs, addDoc } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js";
 
-// Verificar usuario logueado
-onAuthStateChanged(auth, async (user) => {
-  if (!user) {
-    window.location.href = "../index.html";
-    return;
-  }
+// UID fijo ya que no usas login
+const UID = "abejmor";
 
-  document.getElementById("logoutBtn").addEventListener("click", async () => {
-    await signOut(auth);
-    window.location.href = "../index.html";
-  });
-
-  cargarBankrolls(user.uid);
+// Cargar bankrolls al entrar
+window.addEventListener("DOMContentLoaded", async () => {
+  cargarBankrolls();
 });
 
-async function cargarBankrolls(uid) {
+// Cerrar sesión deshabilitado (puedes ocultar el botón si quieres)
+document.getElementById("logoutBtn").addEventListener("click", () => {
+  alert("El sistema ya no tiene login. Este botón será desactivado.");
+});
+
+async function cargarBankrolls() {
   const contenedor = document.getElementById("bankrollsContainer");
   contenedor.innerHTML = "";
 
   const ref = collection(db, "bankrolls");
-  const q = query(ref, where("uid", "==", uid));
+  const q = query(ref); // si quieres filtrar por uid: where("uid", "==", UID)
   const snapshot = await getDocs(q);
 
   snapshot.forEach(doc => {
@@ -48,10 +45,9 @@ document.getElementById("addBankrollBtn").addEventListener("click", async () => 
   const bankInicial = parseFloat(prompt("Bank inicial (€ o u):"));
   const moneda = prompt("¿Moneda o unidad? (€, u)", "€");
 
-  const user = auth.currentUser;
-  if (user && nombre && !isNaN(bankInicial)) {
+  if (nombre && !isNaN(bankInicial)) {
     await addDoc(collection(db, "bankrolls"), {
-      uid: user.uid,
+      uid: UID,
       nombre,
       bankInicial,
       moneda,
@@ -60,6 +56,6 @@ document.getElementById("addBankrollBtn").addEventListener("click", async () => 
       roi: 0,
       creadoEn: new Date()
     });
-    cargarBankrolls(user.uid);
+    cargarBankrolls();
   }
 });

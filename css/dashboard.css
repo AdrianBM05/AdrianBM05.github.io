@@ -15,3 +15,27 @@ select {
 #bankrollsContainer > div {
   transition: all 0.2s ease-in-out;
 }
+
+.boton-fijo-inferior {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  background-color: #2d2948;
+}
+
+.boton-verde {
+  width: 100%;
+  background-color: #22c55e;
+  color: white;
+  padding: 1rem 0;
+  font-size: 1.125rem;
+  font-weight: 600;
+  border-radius: 0;
+}
+
+.boton-verde:hover {
+  background-color: #16a34a;
+}
+
