@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard - BetTracker</title>
+  <link rel="stylesheet" href="../css/dashboard.css" />
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-[#1e1b3a] text-white min-h-screen flex flex-col">
+  <!-- Encabezado -->
+  <header class="flex items-center justify-between p-4 bg-[#2d2948] shadow-md">
+    <button id="menuBtn" class="text-white text-2xl font-bold">☰</button>
+    <h1 class="text-xl font-semibold">BetTracker</h1>
+    <button id="logoutBtn" class="text-sm text-red-400 hover:text-red-200">Cerrar sesión</button>
+  </header>
+
+  <!-- Contenido principal -->
+  <main class="flex-grow p-4">
+    <div class="flex items-center justify-between mb-4">
+      <h2 class="text-lg font-semibold">Tus bankrolls</h2>
+      <select id="ordenSelect" class="bg-[#2d2948] text-white border border-gray-500 rounded p-1">
+        <option value="fecha">Por fecha</option>
+        <option value="ganancias">Por beneficio</option>
+        <option value="roi">Por ROI</option>
+      </select>
+    </div>
+
+    <div id="bankrollsContainer" class="grid gap-4 md:grid-cols-2 lg:grid-cols-3"></div>
+  </main>
+
+  <!-- Botón inferior -->
+  <footer class="p-4 bg-[#2d2948]">
+    <button id="addBankrollBtn" class="w-full bg-green-500 hover:bg-green-600 text-white py-2 rounded-xl">
+      ➕ Añadir Bankroll
+    </button>
+  </footer>
+
+  <script type="module" src="../js/dashboard.js"></script>
+</body>
+</html>
