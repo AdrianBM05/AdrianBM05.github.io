@@ -38,13 +38,4 @@ export class Apuesta {
   }
 }
 
-// Función para calcular el ROI de una apuesta
-Apuesta.prototype.calcularROI = function() {
-  if (this.importe && this.resultado === "ganada") {
-    return ((this.beneficio / this.importe) * 100).toFixed(2);
-  } else if (this.importe && this.resultado === "perdida") {
-    return -100; // ROI negativo si se pierde
-  } else {
-    return 0; // Si no hay importe, ROI es 0
-  }
-};
+

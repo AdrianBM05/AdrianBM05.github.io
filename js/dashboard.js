@@ -1,5 +1,10 @@
-import { db } from './firebase.js';
-import { collection, query, getDocs, addDoc } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js";
+import { db } from "./firebase.js";
+import {
+  collection,
+  query,
+  getDocs,
+  addDoc,
+} from "https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js";
 
 // UID fijo ya que no usas login
 const UID = "abejmor";
@@ -22,16 +27,19 @@ async function cargarBankrolls() {
   const q = query(ref); // si quieres filtrar por uid: where("uid", "==", UID)
   const snapshot = await getDocs(q);
 
-  snapshot.forEach(doc => {
+  snapshot.forEach((doc) => {
     const data = doc.data();
     const tarjeta = document.createElement("div");
-    tarjeta.className = "bg-[#2d2948] p-4 rounded-xl shadow hover:scale-[1.01] transition cursor-pointer";
+    tarjeta.className =
+      "bg-[#2d2948] p-4 rounded-xl shadow hover:scale-[1.01] transition cursor-pointer";
     tarjeta.innerHTML = `
       <h3 class="text-lg font-bold mb-2">${data.nombre}</h3>
       <p>Inicial: ${data.bankInicial}${data.moneda}</p>
-      <p class="${data.ganancias >= 0 ? 'text-green-400' : 'text-red-400'}">Ganancia: ${data.ganancias.toFixed(2)}${data.moneda}</p>
+      <p class="${
+        data.ganancias >= 0 ? "text-green-400" : "text-red-400"
+      }">Ganancia: ${data.ganancias.toFixed(2)}${data.moneda}</p>
       <p>Apuestas: ${data.apuestas || 0}</p>
-      <p>ROI: ${data.roi ? data.roi.toFixed(2) + '%' : '0%'}</p>
+      <p>ROI: ${data.roi ? data.roi.toFixed(2) + "%" : "0%"}</p>
     `;
     tarjeta.addEventListener("click", () => {
       window.location.href = `bankroll.html?id=${doc.id}`;
@@ -40,23 +48,27 @@ async function cargarBankrolls() {
   });
 }
 
+// Añadir evento al botón de añadir bankroll
 document.getElementById("addBankrollBtn").addEventListener("click", async () => {
   const nombre = prompt("Nombre del bankroll:");
   const bankInicial = parseFloat(prompt("Bank inicial (€):"));
 
   if (!nombre || isNaN(bankInicial)) return;
 
-  const docRef = await addDoc(collection(db, "bankrolls"), {
-    nombre,
-    bankInicial,
-    moneda: "€",
-    ganancias: 0,
-    apuestas: 0,
-    roi: 0,
-    creadoEn: new Date()
-  });
+  try {
+    const docRef = await addDoc(collection(db, "bankrolls"), {
+      nombre,
+      bankInicial,
+      moneda: "€",
+      ganancias: 0,
+      apuestas: 0,
+      roi: 0,
+      creadoEn: new Date()
+    });
 
-  // Redirigir directamente al nuevo bankroll
-  window.location.href = `bankroll.html?id=${docRef.id}`;
+    window.location.href = `bankroll.html?id=${docRef.id}`;
+  } catch (error) {
+    console.error("Error al crear el bankroll:", error);
+    alert("Error al crear el bankroll. Inténtalo de nuevo.");
+  }
 });
-
