@@ -1,138 +1,52 @@
+<!-- index.html -->
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <title>Control de Apuestas</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/styles.css">
-    <link rel="stylesheet" href="css/bankrolls.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BetTracker - Login</title>
+  <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-  <div class="main-layout">
-    <header class="header">
-      <button class="menu-btn">&#9776;</button>
-      <h1>Bankrolls</h1>
-    </header>
-
-    <!-- Vista principal: lista de bankrolls -->
-    <main class="content view-principal">
-      <div class="alert-info" style="display:none;"></div>
-      <div class="ordenar">
-        <label for="ordenar-select">Ordenar:</label>
-        <select id="ordenar-select">
-          <option value="nombre">Nombre</option>
-          <option value="capital">Capital</option>
-        </select>
-      </div>
-      <ul class="bankroll-list">
-        <!-- Tarjetas de bankroll aquí -->
-        <li class="bankroll-card">
-          <div class="bankroll-header">
-            <span class="bankroll-title">Nombre del Bankroll</span>
-            <span class="bankroll-fecha">Junio 2025</span>
-            <button class="bankroll-settings" title="Configurar">&#9881;</button>
-          </div>
-          <div class="bankroll-stats-row">
-            <div class="stat">
-              <span class="stat-label">Capital inicial</span>
-              <span class="stat-value">1000€</span>
-            </div>
-            <div class="stat">
-              <span class="stat-label">ROI</span>
-              <span class="stat-value positivo">22.60%</span>
-            </div>
-            <div class="stat">
-              <span class="stat-label">Progresión</span>
-              <span class="stat-value positivo">72.08%</span>
-            </div>
-          </div>
-        </li>
-        <li class="bankroll-card">
-          <div class="bankroll-header">
-            <span class="bankroll-title">Premier</span>
-            <span class="bankroll-fecha">Junio 2025</span>
-            <button class="bankroll-settings" title="Configurar">&#9881;</button>
-          </div>
-          <div class="bankroll-stats-row">
-            <div class="stat">
-              <span class="stat-label">Capital inicial</span>
-              <span class="stat-value">50€</span>
-            </div>
-            <div class="stat">
-              <span class="stat-label">ROI</span>
-              <span class="stat-value positivo">0.00%</span>
-            </div>
-            <div class="stat">
-              <span class="stat-label">Progresión</span>
-              <span class="stat-value positivo">0.00%</span>
-            </div>
-          </div>
-        </li>
-      </ul>
-      <div class="no-bankrolls">
-        <p>No tienes ningún bankroll creado.</p>
-      </div>
-    </main>
-
-    <!-- Vista detalle de un bankroll -->
-    <main class="content view-bankroll" style="display:none;">
-      <div class="bankroll-detalle">
-        <!-- Datos del bankroll seleccionado -->
-        <div class="estadisticas-bankroll"></div>
-        <div class="apuestas-list"></div>
-      </div>
-    </main>
-
-    <!-- Vista de estadísticas generales -->
-    <main class="content view-estadisticas" style="display:none;">
-      <div class="estadisticas-globales"></div>
-    </main>
-
-    <!-- Vista de ajustes -->
-    <main class="content view-ajustes" style="display:none;">
-      <form class="ajustes-form"></form>
-    </main>
-
-    <footer class="footer">
-      <button class="btn-nuevo">Nuevo Bankroll</button>
-    </footer>
+<body class="bg-gray-100 flex items-center justify-center h-screen">
+  <div class="bg-white p-8 rounded-xl shadow-md text-center">
+    <h1 class="text-2xl font-bold mb-4">BetTracker</h1>
+    <button id="loginBtn" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">
+      Iniciar sesión con Google
+    </button>
   </div>
 
-  <!-- Modal para crear bankroll -->
-  <div id="modal-bankroll" class="modal" style="display:none;">
-    <div class="modal-content">
-      <h2>Nuevo Bankroll</h2>
-      <form id="form-bankroll">
-        <label for="nombre">Nombre:</label>
-        <input type="text" id="nombre" name="nombre" required>
-        <label for="capital">Capital inicial:</label>
-        <input type="number" id="capital" name="capital" required min="1">
-        <div class="modal-actions">
-          <button type="submit" class="btn-guardar">Guardar</button>
-          <button type="button" class="btn-cerrar">Cancelar</button>
-        </div>
-      </form>
-    </div>
-  </div>
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
+    import { getAuth, signInWithPopup, GoogleAuthProvider } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js";
 
-  <!-- Modal para editar/eliminar bankroll -->
-  <div id="modal-editar-bankroll" class="modal" style="display:none;">
-    <div class="modal-content">
-      <h2>Editar Bankroll</h2>
-      <form id="form-editar-bankroll">
-        <label for="editar-nombre">Nombre:</label>
-        <input type="text" id="editar-nombre" name="editar-nombre" required>
-        <label for="editar-capital">Capital inicial:</label>
-        <input type="number" id="editar-capital" name="editar-capital" required min="1">
-        <div class="modal-actions">
-          <button type="submit" class="btn-guardar">Guardar cambios</button>
-          <button type="button" class="btn-eliminar">Eliminar</button>
-          <button type="button" class="btn-cerrar-editar">Cancelar</button>
-        </div>
-      </form>
-    </div>
-  </div>
+    const firebaseConfig = {
+      apiKey: "AIzaSyBH2El3mxJPdhHFixOLxT-VjN1djZNr0wI",
+      authDomain: "bettracker-e4900.firebaseapp.com",
+      projectId: "bettracker-e4900",
+      storageBucket: "bettracker-e4900.firebasestorage.app",
+      messagingSenderId: "994805962633",
+      appId: "1:994805962633:web:5316c2cbf8a407687cf358",
+      measurementId: "G-5FK0H86L26"
+    };
 
-  <script src="js/main.js"></script>
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const provider = new GoogleAuthProvider();
+
+    document.getElementById("loginBtn").addEventListener("click", async () => {
+      try {
+        const result = await signInWithPopup(auth, provider);
+        const user = result.user;
+        localStorage.setItem("user", JSON.stringify(user));
+        window.location.href = "dashboard.html";
+      } catch (error) {
+        alert("Error al iniciar sesión");
+        console.error(error);
+      }
+    });
+  </script>
 </body>
 </html>
