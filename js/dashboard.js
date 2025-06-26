@@ -9,22 +9,63 @@ import {
 // UID fijo ya que no usas login
 const UID = "abejmor";
 
-// Cargar bankrolls al entrar
+// Al cargar la página
 window.addEventListener("DOMContentLoaded", async () => {
-  cargarBankrolls();
+  await cargarBankrolls();
+
+  // Elementos del DOM
+  const addBtn = document.getElementById("addBankrollBtn");
+  const modal = document.getElementById("modalOverlay");
+  const cancelBtn = document.getElementById("cancelBtn");
+  const confirmBtn = document.getElementById("confirmBtn");
+  const nombreInput = document.getElementById("nombreInput");
+  const capitalInput = document.getElementById("capitalInput");
+
+  // Mostrar modal
+  addBtn.addEventListener("click", () => {
+    nombreInput.value = "";
+    capitalInput.value = "";
+    modal.classList.remove("hidden");
+  });
+
+  // Cancelar
+  cancelBtn.addEventListener("click", () => {
+    modal.classList.add("hidden");
+  });
+
+  // Confirmar y crear bankroll
+  confirmBtn.addEventListener("click", async () => {
+    const nombre = nombreInput.value.trim();
+    const capital = parseFloat(capitalInput.value);
+
+    if (!nombre || isNaN(capital)) {
+      alert("Por favor, completa todos los campos correctamente.");
+      return;
+    }
+
+    const docRef = await addDoc(collection(db, "bankrolls"), {
+      nombre,
+      bankInicial: capital,
+      moneda: "€",
+      ganancias: 0,
+      apuestas: 0,
+      roi: 0,
+      uid: UID,
+      creadoEn: new Date()
+    });
+
+    modal.classList.add("hidden");
+    window.location.href = `bankroll.html?id=${docRef.id}`;
+  });
 });
 
-// Cerrar sesión deshabilitado (puedes ocultar el botón si quieres)
-document.getElementById("logoutBtn").addEventListener("click", () => {
-  alert("El sistema ya no tiene login. Este botón será desactivado.");
-});
-
+// Función para cargar los bankrolls
 async function cargarBankrolls() {
   const contenedor = document.getElementById("bankrollsContainer");
   contenedor.innerHTML = "";
 
   const ref = collection(db, "bankrolls");
-  const q = query(ref); // si quieres filtrar por uid: where("uid", "==", UID)
+  const q = query(ref);
   const snapshot = await getDocs(q);
 
   snapshot.forEach((doc) => {
@@ -35,9 +76,9 @@ async function cargarBankrolls() {
     tarjeta.innerHTML = `
       <h3 class="text-lg font-bold mb-2">${data.nombre}</h3>
       <p>Inicial: ${data.bankInicial}${data.moneda}</p>
-      <p class="${
-        data.ganancias >= 0 ? "text-green-400" : "text-red-400"
-      }">Ganancia: ${data.ganancias.toFixed(2)}${data.moneda}</p>
+      <p class="${data.ganancias >= 0 ? "text-green-400" : "text-red-400"}">
+        Ganancia: ${data.ganancias.toFixed(2)}${data.moneda}
+      </p>
       <p>Apuestas: ${data.apuestas || 0}</p>
       <p>ROI: ${data.roi ? data.roi.toFixed(2) + "%" : "0%"}</p>
     `;
@@ -47,28 +88,3 @@ async function cargarBankrolls() {
     contenedor.appendChild(tarjeta);
   });
 }
-
-// Añadir evento al botón de añadir bankroll
-document.getElementById("addBankrollBtn").addEventListener("click", async () => {
-  const nombre = prompt("Nombre del bankroll:");
-  const bankInicial = parseFloat(prompt("Bank inicial (€):"));
-
-  if (!nombre || isNaN(bankInicial)) return;
-
-  try {
-    const docRef = await addDoc(collection(db, "bankrolls"), {
-      nombre,
-      bankInicial,
-      moneda: "€",
-      ganancias: 0,
-      apuestas: 0,
-      roi: 0,
-      creadoEn: new Date()
-    });
-
-    window.location.href = `bankroll.html?id=${docRef.id}`;
-  } catch (error) {
-    console.error("Error al crear el bankroll:", error);
-    alert("Error al crear el bankroll. Inténtalo de nuevo.");
-  }
-});
