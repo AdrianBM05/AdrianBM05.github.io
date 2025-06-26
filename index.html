@@ -38,7 +38,7 @@
 
     document.getElementById("loginBtn").addEventListener("click", async () => {
       try {
-        const result = await signInWithPopup(auth, provider);
+        const result = await signInWithRedirect(auth, provider);
         const user = result.user;
         localStorage.setItem("user", JSON.stringify(user));
         window.location.href = "dashboard.html";
