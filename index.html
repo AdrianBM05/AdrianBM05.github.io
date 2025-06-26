@@ -37,16 +37,30 @@
     const provider = new GoogleAuthProvider();
 
     document.getElementById("loginBtn").addEventListener("click", async () => {
+      const btn = document.getElementById("loginBtn");
+      btn.disabled = true;
+      btn.textContent = "Iniciando sesión...";
+
       try {
-        const result = await signInWithRedirect(auth, provider);
+        const result = await signInWithPopup(auth, provider);
         const user = result.user;
-        localStorage.setItem("user", JSON.stringify(user));
+        localStorage.setItem("user", JSON.stringify({
+          uid: user.uid,
+          displayName: user.displayName,
+          email: user.email,
+          photoURL: user.photoURL
+        }));
         window.location.href = "dashboard.html";
       } catch (error) {
-        alert("Error al iniciar sesión");
-        console.error(error);
+        alert("Error al iniciar sesión: " + error.message);
+        console.error("Código:", error.code);
+        console.error("Mensaje:", error.message);
+        btn.disabled = false;
+        btn.textContent = "Iniciar sesión con Google";
       }
     });
+
   </script>
+
 </body>
 </html>
